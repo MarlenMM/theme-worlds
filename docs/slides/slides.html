@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 13.333in 7.5in; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: #0A0D13; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #EEF3FA; }
+
+.slide { position: relative; width: 13.333in; height: 7.5in; overflow: hidden;
+  background: #0A0D13; page-break-after: always; padding: 0.34in 0.45in 0.4in;
+  display: flex; flex-direction: column; }
+.slide:last-child { page-break-after: auto; }
+
+.kick { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #55D6FF; font-weight: 700; }
+h1 { font-size: 33px; line-height: 1.04; font-weight: 800; letter-spacing: -.015em; margin-top: 4px; }
+h1 .dim { color: #93A2B8; font-weight: 600; }
+.foot { position: absolute; left: .45in; right: .45in; bottom: .16in; display: flex;
+        justify-content: space-between; font-size: 10.5px; color: #5C6B82; letter-spacing: .04em; }
+.num { color: #55D6FF; font-weight: 700; }
+.mono { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.acc { color: #55D6FF; } .amb { color: #FFB44D; } .red { color: #FF7A7A; } .grn { color: #7DE6A8; }
+.card { background: #121926; border: 1px solid #1F2A3C; border-radius: 9px; padding: 10px 12px; }
+.card .kick { font-size: 11px; letter-spacing: .13em; }
+/* every panorama keeps its native aspect ratio — no cover-cropping anywhere */
+img { display: block; width: 100%; height: auto; border-radius: 5px; }
+.cap { font-size: 11px; color: #8FA0B8; margin-top: 4px; line-height: 1.3; }
+.cap b { color: #DCE6F5; font-weight: 700; }
+.row { display: flex; gap: 11px; width: 100%; }
+p, li { font-size: 13.5px; line-height: 1.45; color: #C6D2E3; }
+b { color: #FFFFFF; }
+.k { font-family: "SF Mono", Menlo, monospace; font-size: 11.5px; color: #8AE0FF; }
+table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
+td { padding: 4px 6px; border-bottom: 1px solid #1E2839; vertical-align: top; color: #C6D2E3; }
+td.n { text-align: right; font-family: "SF Mono", Menlo, monospace; color: #DCE6F5; white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+
+.canvasbar { position: relative; background: #131A27; border: 1px solid #26344A; border-radius: 6px; }
+.win { position: absolute; border-radius: 5px; border: 2px solid #55D6FF; background: rgba(85,214,255,.14); }
+.win.wrap { border-color: #FFB44D; background: rgba(255,180,77,.30); }
+.lbl { font-size: 11.5px; color: #8FA0B8; margin-top: 5px; line-height: 1.35; }
+.eq { background: #0E1521; border: 1px solid #24314A; border-radius: 7px; padding: 8px 9px;
+      font-size: 13.5px; text-align: center; color: #CFE9FF; }
+.tok { height: 30px; border-radius: 6px; overflow: hidden; background: #1B2536; display: flex; }
+.tok .keep { width: 79.4%; background: linear-gradient(90deg,#1E5F7A,#2E8FB4); }
+.tok .drop { width: 20.6%; background: repeating-linear-gradient(45deg,#5C1F25,#5C1F25 6px,#7A2A32 6px,#7A2A32 12px); }
+.tok span { align-self: center; padding: 0 8px; font-size: 11px; font-weight: 700; }
+.stat { background: #121926; border: 1px solid #1F2A3C; border-radius: 10px; padding: 10px 11px; }
+.stat .big { font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+.stat .t { font-size: 11px; color: #DCE6F5; font-weight: 700; margin-top: 5px; }
+.stat .d { font-size: 10px; color: #8494AB; margin-top: 3px; line-height: 1.3; }
+</style></head>
+<body>
+
+<!-- ============ 1 · SHOWCASE (voting slide) — three full 4:1 panoramas, uncropped ============ -->
+<div class="slide" style="padding:.42in .45in .4in">
+  <div class="row" style="gap:.3in;align-items:flex-start">
+    <div style="flex:1;padding-top:.06in">
+      <div class="kick" style="font-size:11.5px">KAIST AIC.20000 · Visual Content Contest</div>
+      <div style="font-size:52px;font-weight:800;letter-spacing:-.02em;line-height:1.02;margin-top:8px">Theme<br>Worlds</div>
+      <div style="color:#A9B7CC;font-size:15px;line-height:1.45;margin-top:14px">
+        Wide panoramas whose <b>left and right edges are the same edge</b> — roll one sideways and no seam exists.</div>
+      <div style="color:#A9B7CC;font-size:15px;line-height:1.45;margin-top:11px">
+        <b>Stable&nbsp;Diffusion&nbsp;v1.5 only.</b><br>Zero source images. Zero fine-tuning.<br>
+        One notebook, one free Colab T4.</div>
+      <div style="margin-top:18px;padding-top:13px;border-top:1px solid #22304A;font-size:13px;color:#7E8EA6;line-height:1.55">
+        <b style="color:#EEF3FA;font-size:15.5px">Marlen Melis</b><br>KAIST · Fall 2026</div>
+    </div>
+    <div style="width:7.45in;flex:none;display:flex;flex-direction:column;gap:9px">
+      <div><img src="img/h1.jpg"><div class="cap">volcanic_lava_world <b>+</b> flooded_metropolis · seed 201</div></div>
+      <div><img src="img/h2.jpg"><div class="cap">cyberpunk <b>+</b> underwater · seed 1001</div></div>
+      <div><img src="img/g8.jpg"><div class="cap">fantasy <b>+</b> medieval · seed 1002</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Every image 2048 × 512 px, shown at full width and full aspect ratio — unedited, straight out of the notebook</span><span class="num">1</span></div>
+</div>
+
+<!-- ============ 2 · METHOD ============ -->
+<div class="slide">
+  <div class="kick">Method · the sampler is written out in the notebook, not imported</div>
+  <h1>SD v1.5 paints 512×512 — <span class="dim">so never ask it for more</span></h1>
+
+  <div class="row" style="margin-top:10px;gap:11px;align-items:stretch">
+    <div class="card" style="flex:1.1">
+      <div class="kick">1 · MultiDiffusion, re-implemented</div>
+      <p style="margin-top:6px">Ask SD v1.5 directly for 2048×512 and it paints <b>four 512-ish scenes glued together</b> —
+        duplicated skylines, warped geometry. Instead: keep <b>one shared latent canvas</b>, cut overlapping 64×64-latent
+        (512 px) windows, run one ordinary DDIM step on each, and <b>average every window's opinion back into the canvas at
+        every step</b>.</p>
+      <div class="eq mono" style="margin-top:8px">x<sub>t−1</sub> = ( Σ<sub>i</sub> S<sub>i</sub><sup>T</sup> Φ(S<sub>i</sub> x<sub>t</sub>) ) ⊘ ( Σ<sub>i</sub> S<sub>i</sub><sup>T</sup> 1 )</div>
+      <div class="canvasbar" style="height:46px;margin-top:9px">
+        <div class="win" style="left:2%;width:26%;top:5px;height:36px"></div>
+        <div class="win" style="left:20%;width:26%;top:5px;height:36px"></div>
+        <div class="win" style="left:38%;width:26%;top:5px;height:36px"></div>
+        <div class="win" style="left:56%;width:26%;top:5px;height:36px"></div>
+        <div class="win" style="left:72%;width:26%;top:5px;height:36px"></div>
+      </div>
+      <div class="lbl">Stride 16 latent cells → <b style="color:#DCE6F5">16 windows per step</b>, every latent cell covered ≥ 4×.
+        No weight is touched and no tensor exceeds 64×64 latents — which is why 2048×512 fits on a free T4.
+        <span class="amb">DDIM is required:</span> <span class="k">scheduler.step()</span> runs per window, out of order, and DDIM is
+        stateless (SD v1.5's default PNDM is not). fp16 UNet, <b style="color:#DCE6F5">fp32 fusion accumulator</b>, ~400 batched
+        UNet calls per candidate.</div>
+    </div>
+
+    <div class="card" style="flex:1">
+      <div class="kick amb">2 · Circular windows = the loop</div>
+      <div class="canvasbar" style="height:40px;margin-top:7px">
+        <div class="win" style="left:4%;width:22%;top:5px;height:30px"></div>
+        <div class="win" style="left:24%;width:22%;top:5px;height:30px"></div>
+        <div class="win" style="left:44%;width:22%;top:5px;height:30px"></div>
+        <div class="win" style="left:64%;width:22%;top:5px;height:30px"></div>
+        <div class="win wrap" style="left:84%;width:16%;top:5px;height:30px;border-right:none;border-radius:5px 0 0 5px"></div>
+        <div class="win wrap" style="left:0;width:6%;top:5px;height:30px;border-left:none;border-radius:0 5px 5px 0"></div>
+      </div>
+      <div class="lbl"><span class="amb">The amber window runs off the right edge and continues on the left</span> —
+        <span class="k">idx = arange(w0,w1) % W</span>. Both ends share windows from step 1 and are denoised as one surface;
+        <b style="color:#DCE6F5">nothing is stitched afterwards</b>. The VAE also gets ±8 latent columns of circular padding,
+        cropped after decoding, so the decoder never sees a boundary either.</div>
+      <div class="lbl" style="margin-top:8px">Measured over <b style="color:#DCE6F5">12 paired runs</b>: seam ratio
+        <b class="red">7.94</b> with wrapping off versus <b class="acc">1.05</b> with it on — a mean
+        <b style="color:#DCE6F5">7.6×</b> improvement on identical seeds, never below 5.4×.</div>
+    </div>
+
+    <div class="card" style="flex:1">
+      <div class="kick amb">3 · Two themes, no truncation</div>
+      <div class="tok" style="margin-top:8px">
+        <div class="keep"><span>77 tokens — all CLIP reads</span></div>
+        <div class="drop"><span class="red">20 dropped</span></div>
+      </div>
+      <div class="lbl">A fused two-theme prompt measures <b style="color:#DCE6F5">97 tokens</b>; everything past 77 is silently
+        discarded — and what is cut is the tail, i.e. the quality suffix, every time.</div>
+      <p style="margin-top:7px"><b class="acc">So I never concatenate.</b> The sampler takes <b>K conditioning branches</b>,
+        each with its own embedding <i>per window</i>; one UNet call carries the unconditional pass plus all K branches:</p>
+      <div class="eq mono" style="margin-top:7px;font-size:13px">ε̂ = ε<sub>u</sub> + g · Σ<sub>k</sub> w<sub>k</sub>(ε<sub>k</sub> − ε<sub>u</sub>)</div>
+      <div class="lbl"><span class="k">compose</span> — both themes on every pixel (costs 1.53×)<br>
+        <span class="k">regions</span> — each theme owns a side of the loop, via a circular raised-cosine field<br>
+        <span class="k">blend</span> — one averaged embedding everywhere<br>
+        <span class="k">single_prompt</span> — the naive concatenation, kept as a control</div>
+    </div>
+  </div>
+
+  <div class="kick" style="margin-top:11px;font-size:11px;color:#8FA0B8">Controls — cyberpunk + underwater, one seed, 1024 × 512, 30 steps, identical in every other respect</div>
+  <div class="row" style="margin-top:6px;gap:10px">
+    <div style="flex:1"><img src="img/circ_off.jpg"><div class="cap"><b class="red">circular OFF</b> · rolled 50% · seam <b class="red">6.39</b></div></div>
+    <div style="flex:1"><img src="img/circ_on.jpg"><div class="cap"><b class="acc">circular ON</b> · same seed · seam <b class="acc">0.97</b></div></div>
+    <div style="flex:1"><img src="img/fus0.jpg"><div class="cap"><b class="red">single_prompt</b> — dry skyline, reef <b>gone</b></div></div>
+    <div style="flex:1"><img src="img/fus1.jpg"><div class="cap"><b>blend</b> — neither city nor reef</div></div>
+    <div style="flex:1"><img src="img/fus2.jpg"><div class="cap"><b class="amb">regions</b> — reef centre, towers at the ends</div></div>
+    <div style="flex:1"><img src="img/fus3.jpg"><div class="cap"><b class="acc">compose</b> — coral-encrusted neon towers</div></div>
+  </div>
+  <div style="margin-top:11px;font-size:13px;color:#A9B7CC;line-height:1.45">
+    <b class="acc">Read it left to right:</b> wrapping the windows removes the join entirely (6.39 → 0.97 on the same seed);
+    then the four ways of combining two themes — from the naive concatenation that <b>deletes one theme outright</b>,
+    through an averaged embedding and a region split, to noise-space composition that fuses them into one hybrid world.
+  </div>
+  <div class="foot"><span>fp16 UNet · fp32 fusion accumulator · ~400 batched UNet calls per candidate · tiled-VAE fallback on OOM</span><span class="num">2</span></div>
+</div>
+
+<!-- ============ 3 · RESULTS ============ -->
+<div class="slide">
+  <div class="kick">Results · every number measured from the runs, none asserted</div>
+  <h1>Does it actually loop? <span class="dim">Roll it, then measure it.</span></h1>
+
+  <div class="row" style="margin-top:10px;gap:11px;align-items:flex-start">
+    <div style="flex:1.3;display:flex;flex-direction:column;gap:8px">
+      <div><img src="img/loop_a.jpg"><div class="cap"><b>As generated</b> — cyberpunk, seed 1000, 2048 × 512</div></div>
+      <div><img src="img/loop_b.jpg"><div class="cap"><b>Rolled 50%</b> — the former left/right join now sits dead centre.
+        Nothing to see. Seam ratio <b class="acc mono">1.16</b></div></div>
+      <div class="card" style="padding:9px 11px">
+        <div class="lbl" style="margin-top:0"><b class="acc">The metric.</b>
+          <span class="mono" style="color:#CFE9FF">R = mean|first col − last col| ÷ mean|neighbouring col difference|</span> —
+          R ≈ 1 means the wrap-around join is statistically indistinguishable from any other pair of adjacent columns,
+          while a strip merely cropped to size blows up.</div>
+      </div>
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;gap:9px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+        <div class="stat"><div class="big acc">1.12</div><div class="t">Mean seam ratio</div>
+          <div class="d">28 panoramas, 12 configurations; 26 of 28 below 1.5</div></div>
+        <div class="stat"><div class="big amb">7.6×</div><div class="t">Circular on vs off</div>
+          <div class="d">12 paired runs: 7.94 → 1.05 on identical seeds; never below 5.4×</div></div>
+        <div class="stat"><div class="big" style="color:#B79CFF">1.53×</div><div class="t">Cost of <span class="mono">compose</span></div>
+          <div class="d">K+1 passes per window, 9 paired runs; theory said 1.5×</div></div>
+        <div class="stat"><div class="big grn">0.99</div><div class="t">vs diffusers' own sampler</div>
+          <div class="d">Reference 0.95 ± 0.22 vs mine 0.99 ± 0.22 over 12 pairs</div></div>
+      </div>
+      <div class="card" style="padding:9px 11px">
+        <div class="kick" style="font-size:10.5px">Circular ablation — same seed, same steps, same prompt</div>
+        <table style="margin-top:5px">
+          <tr><td>ink_wash_mtns + dragon_spire</td><td class="n red">14.63</td><td class="n acc">1.36</td></tr>
+          <tr><td>fantasy + medieval</td><td class="n red">11.91</td><td class="n acc">1.11</td></tr>
+          <tr><td>volcanic_lava + flooded_city</td><td class="n red">8.51</td><td class="n acc">0.78</td></tr>
+          <tr><td>cyberpunk + underwater</td><td class="n red">6.39</td><td class="n acc">0.97</td></tr>
+          <tr><td style="color:#8FA0B8">…12 runs, mean</td><td class="n red">7.94</td><td class="n acc">1.05</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:10px;gap:11px">
+    <div class="card" style="flex:1"><div class="kick grn" style="font-size:10.5px">Reproducible to the byte</div>
+      <p style="margin-top:5px;font-size:12px">Two Colab sessions, different days, same seeds → <b>byte-identical PNGs</b>
+        (MD5 <span class="mono" style="font-size:10.5px">f737a887…, 16f0c451…, 8a6e4445…</span>). Initial noise is drawn on the
+        <b>CPU</b> generator, whose RNG is identical across GPUs.</p></div>
+    <div class="card" style="flex:1"><div class="kick amb" style="font-size:10.5px">A bug found in the reference</div>
+      <p style="margin-top:5px;font-size:12px">diffusers' deprecated panorama pipeline scatters windows by <i>canvas</i> row index,
+        so circular padding breaks on any canvas taller than one window. Mine never addresses a window by canvas coordinates —
+        which is why the 768-tall worlds work.</p></div>
+    <div class="card" style="flex:1"><div class="kick" style="font-size:10.5px">What I learned</div>
+      <p style="margin-top:5px;font-size:12px"><b>Tokenisation, not attention,</b> is what kills fused prompts — measuring the
+        prompt beat staring at the image. Composition is seed-sensitive, so the notebook renders several seeds and ranks them on a
+        <b>worst-of-both-themes</b> CLIP score.</p></div>
+  </div>
+  <div class="foot"><span>Controls are cells in the submitted notebook: circular on/off, four fusion modes, stride 8 vs 16, diffusers cross-check — one variable at a time</span><span class="num">3</span></div>
+</div>
+
+<!-- ============ 4 · RESOURCES, SETTINGS, RULES ============ -->
+<div class="slide">
+  <div class="kick">Data, resources, settings and compliance</div>
+  <h1>Everything loaded, everything set, <span class="dim">nothing borrowed</span></h1>
+
+  <div class="row" style="margin-top:10px;gap:11px;align-items:stretch">
+    <div class="card" style="flex:1.15">
+      <div class="kick amb">Pretrained weights — the complete list</div>
+      <table style="margin-top:6px">
+        <tr><td style="width:32%"><b>SD v1.5</b> (fp16)<div class="mono" style="font-size:9.5px;color:#7E8EA6;margin-top:2px">stable-diffusion-v1-5/<br>stable-diffusion-v1-5</div></td>
+            <td>Generates <b>every</b> submitted pixel. Ships its own CLIP ViT-L/14 text encoder + VAE; scheduler swapped to DDIM.</td></tr>
+        <tr><td><b>CLIP ViT-L/14</b><div class="mono" style="font-size:9.5px;color:#7E8EA6;margin-top:2px">openai/clip-vit-<br>large-patch14</div></td>
+            <td>Scores finished images only — generates nothing. The allowed "pretrained reward model" case; switchable off.</td></tr>
+        <tr><td><b>Source images</b></td><td><b class="acc">Zero</b> of the 10 allowed — no image input, no upload step, no <span class="k">data.zip</span>, no training of any kind.</td></tr>
+      </table>
+      <div class="kick" style="margin-top:8px">Candidate selection</div>
+      <p style="margin-top:4px;font-size:12px">CLIP scores <b>six square crops taken around the loop</b>; a theme's score is its best
+        crop and the candidate's score is the <b>worst of the two themes</b> — which punishes a render that quietly dropped one.
+        Seam ratio &gt; 4 is disqualified. Every run writes a JSON log with checkpoint id, prompts, seeds and scores.</p>
+    </div>
+
+    <div class="card" style="flex:.85">
+      <div class="kick amb">Settings</div>
+      <table style="margin-top:6px">
+        <tr><td>Canvas</td><td class="n">2048 × 512 · also 1536 × 768</td></tr>
+        <tr><td>Window / stride</td><td class="n">64 × 64 latents / 16 cells</td></tr>
+        <tr><td>Sampler</td><td class="n">DDIM · 50 steps · CFG 7.5</td></tr>
+        <tr><td>Windows per step</td><td class="n">16 · cells covered ≥ 4×</td></tr>
+        <tr><td>Precision</td><td class="n">fp16 UNet · fp32 accumulator</td></tr>
+        <tr><td>Fusion</td><td class="n">compose λ 0.5 · regions σ 2.0</td></tr>
+        <tr><td>Decode</td><td class="n">± 8 latent cols wrapped</td></tr>
+        <tr><td>Control render (1024×512, 30 st.)</td><td class="n">32 – 36 s</td></tr>
+        <tr><td>…same render, <span class="mono">compose</span></td><td class="n">49 – 57 s</td></tr>
+      </table>
+      <div class="lbl" style="margin-top:6px">Prompt = <span class="k">"{theme}, seamless wide panorama, sweeping vista, single horizon, … digital matte painting"</span>
+        (≤ 55 tokens); the negative prompt targets seams, tiling, duplicate objects and text (66 tokens).</div>
+    </div>
+
+    <div class="card" style="flex:.8">
+      <div class="kick grn">Rule compliance</div>
+      <p style="margin-top:5px;font-size:12px;line-height:1.55">
+        ✓ Every pixel from SD v1.5<br>
+        ✓ No SDXL / FLUX, no third-party checkpoint, LoRA or DreamBooth<br>
+        ✓ No training or fine-tuning<br>
+        ✓ Zero source images → no <span class="k">data.zip</span><br>
+        ✓ CLIP used only as a judge<br>
+        ✓ Single <span class="k">.ipynb</span>, end to end on a Colab T4, all cell outputs saved<br>
+        ✓ Every seed fixed and logged; CPU-drawn noise reproduces across GPUs<br>
+        ✓ Every label drawn with PIL on finished pixels — no text asked of the model<br>
+        ✓ Static PNG output
+      </p>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:11px;gap:11px">
+    <div style="flex:1"><img src="img/g2.jpg"><div class="cap">giant_tree_civilization <b>+</b> biopunk_organic_city</div></div>
+    <div style="flex:1"><img src="img/g3.jpg"><div class="cap">ink_wash_mountains <b>+</b> dragon_spire</div></div>
+    <div style="flex:1"><img src="img/g0.jpg"><div class="cap">arctic_ice_cave <b>+</b> cozy_village_snowfall</div></div>
+  </div>
+
+  <div style="margin-top:9px;font-size:12.5px;color:#A9B7CC;line-height:1.45">
+    <b class="acc">The takeaway:</b> a sampling schedule, not a bigger model — circular MultiDiffusion turns SD v1.5's 512 px window
+    into a seamless 2048 px world, and multi-branch conditioning lets two themes share it without ever truncating a prompt.
+    <span style="color:#7E8EA6">MultiDiffusion: Bar-Tal et al., ICML 2023 · Composable Diffusion: Liu et al., ECCV 2022 · CLIP: Radford et al., ICML 2021</span>
+  </div>
+  <div class="foot"><span>Marlen Melis · KAIST AIC.20000 Introduction to AI Computing · Fall 2026</span><span class="num">4</span></div>
+</div>
+
+</body></html>
