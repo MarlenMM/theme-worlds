@@ -36,7 +36,9 @@
 
   .viewer { position: relative; border-radius: 14px; overflow: hidden; background: #05070b;
     border: 1px solid var(--line); }
-  canvas { display: block; width: 100%; height: min(62vh, 560px); min-height: 280px; cursor: grab;
+  /* Landscape at every width: on a phone, 62vh would make a tall portrait
+     slot, the worst possible frame for a 4:1 panorama. */
+  canvas { display: block; width: 100%; height: min(62vh, 560px, max(240px, 72vw)); cursor: grab;
     touch-action: none; outline: none; }
   canvas.dragging { cursor: grabbing; }
   canvas:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
