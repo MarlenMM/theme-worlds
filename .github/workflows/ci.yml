@@ -1,0 +1,57 @@
+name: CI
+
+# The notebook needs a GPU and ~6 GB of model downloads, so CI does not run it
+# end to end -- that is what its saved outputs are for. What CI does run is the
+# notebook's own sampler code, pulled out of the .ipynb and executed on a CPU
+# against a stub pipeline (tests/conftest.py), plus structural checks on the
+# notebook itself: which weights it loads, and that it was saved after a single
+# top-to-bottom run. No API key, token or model download is needed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff==0.16.7
+      - run: ruff check .
+
+  test:
+    name: Tests (pytest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      # The CPU wheel, explicitly. The default torch wheel carries the CUDA
+      # runtime -- roughly 2 GB the runner would download for tests that never
+      # touch a GPU.
+      - name: Install torch (CPU wheel)
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: python -m pytest
