@@ -1,0 +1,10 @@
+# For the tests and scripts in this repository. The notebook installs its own
+# dependencies when it runs on Colab.
+#
+# Install torch from the CPU index first, or pip fetches the ~2 GB CUDA build:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+torch>=2.2
+diffusers>=0.30
+numpy>=1.26
+pillow>=10.1
+pytest>=8.0
