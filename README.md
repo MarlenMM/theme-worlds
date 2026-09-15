@@ -91,13 +91,13 @@ latents, which is why a 2048×512 world fits on a free T4. One step of the
 sampler in [the notebook](notebook/theme_worlds.ipynb) (Step 5):
 
 ```mermaid
-flowchart LR
-    X["latent canvas x_t<br/>256 × 64 cells"] --> W["16 overlapping 64×64 windows<br/>columns indexed mod 256"]
-    W --> U["UNet, batched<br/>unconditional + K prompt branches"]
-    U --> G["guidance per window<br/>ε = ε_u + g · Σ w_k (ε_k − ε_u)"]
-    G --> D["DDIM step<br/>on every window"]
-    D --> F["fold back with index_add_<br/>÷ how many windows covered each cell"]
-    F --> X2["x_t−1"]
+flowchart TB
+    X["latent canvas x_t · 256 × 64 cells"] --> W["16 overlapping 64×64 windows, columns indexed mod 256"]
+    W --> U["UNet, batched: unconditional + K prompt branches"]
+    U --> G["guidance per window: ε = ε_u + g · Σ w_k (ε_k − ε_u)"]
+    G --> D["DDIM step on every window"]
+    D --> F["fold back with index_add_, ÷ how many windows covered each cell"]
+    F --> X2["x_t−1, and repeat for 50 steps"]
 ```
 
 Two extensions on top of the published method:
