@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Where the notebook writes when it is run outside Colab.
+AIC200-ThemeWorlds/
+
+# Full-resolution PNGs are attached to the GitHub release, not committed:
+# 28 of them are ~55 MB, against ~10 MB for everything else in the repository.
+outputs/
+*.png
+!docs/**/*.png
+
+# LaTeX build products (docs/writeup/theme-worlds-writeup.pdf is committed).
+*.aux
+*.log
+*.out
