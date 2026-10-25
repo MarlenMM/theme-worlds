@@ -1,0 +1,59 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, and cite the methods it builds on (references)."
+title: "Theme Worlds: seamless 360-degree panoramas from stock Stable Diffusion v1.5"
+type: software
+authors:
+  - family-names: Melis
+    given-names: Marlen
+    affiliation: KAIST
+version: "1.0"
+date-released: "2026-09-15"
+license: MIT
+repository-code: "https://github.com/MarlenMM/theme-worlds"
+url: "https://marlenmm.github.io/theme-worlds/"
+keywords:
+  - diffusion models
+  - MultiDiffusion
+  - panorama generation
+  - Stable Diffusion
+  - classifier-free guidance
+  - composable diffusion
+abstract: >-
+  A MultiDiffusion sampler written from scratch for stock Stable Diffusion v1.5 that produces seamless
+  wrap-around panoramas: circular windows make the loop a property of the sampling rather than a
+  post-process, and multi-branch conditioning combines two themes without truncating either prompt at
+  CLIP's 77-token limit. Mean seam ratio 1.12 over 28 panoramas; no training and no source images.
+  Built for the Visual Content Contest of KAIST AIC.20000 (Fall 2026).
+references:
+  - type: conference-paper
+    title: "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation"
+    authors:
+      - family-names: Bar-Tal
+        given-names: Omer
+      - family-names: Yariv
+        given-names: Lior
+      - family-names: Lipman
+        given-names: Yaron
+      - family-names: Dekel
+        given-names: Tali
+    collection-title: "International Conference on Machine Learning (ICML)"
+    year: 2023
+    url: "https://arxiv.org/abs/2302.08113"
+  - type: conference-paper
+    title: "Compositional Visual Generation with Composable Diffusion Models"
+    authors:
+      - family-names: Liu
+        given-names: Nan
+      - name: "et al."
+    collection-title: "European Conference on Computer Vision (ECCV)"
+    year: 2022
+    url: "https://arxiv.org/abs/2206.01714"
+  - type: conference-paper
+    title: "High-Resolution Image Synthesis with Latent Diffusion Models"
+    authors:
+      - family-names: Rombach
+        given-names: Robin
+      - name: "et al."
+    collection-title: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)"
+    year: 2022
+    url: "https://arxiv.org/abs/2112.10752"
